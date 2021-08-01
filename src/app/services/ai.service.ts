@@ -8,11 +8,13 @@ export class AiService {
 
   private _changeDirectionChance= 0.008;
   private _updateMovementXChance=0.8;
-  private _updateMovementYChance=0.2;
+  private _updateMovementYChance=0.5;
 
   constructor() { }
 
   basicAI(sprite: Sprite) {
+    if(sprite.maxSpeed == 0) return sprite; 
+
     let chance = Math.random();
 
     if(chance< this._changeDirectionChance) {
