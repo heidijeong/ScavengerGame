@@ -26,12 +26,14 @@ export class AppComponent implements OnInit {
     console.log(event);
     if (event.key == 'ArrowLeft') {
       this.x=this.x-10;
+      this._spriteService.sprites[0].direction='left';
     }
     if (event.key == 'ArrowUp') {
       this.y=this.y-10;
     }
     else if (event.key =='ArrowRight') {
       this.x=this.x+10;
+      this._spriteService.sprites[0].direction='right';
     }
     else if (event.key == 'ArrowDown') {
       this.y=this.y+10
@@ -51,9 +53,9 @@ export class AppComponent implements OnInit {
     console.log('hi');
 
     this._spriteService.populateBee(6);
-    this._spriteService.populateFlower(15);
+    this._spriteService.populateFlower(100);
     this._spriteService.populateCloud(10);
-    this._spriteService.populatePlant(6);
+    this._spriteService.populatePlant(10);
     this._mapService.init(two);
 
     for (let i=0; i<this._spriteService.sprites.length; i++) {
@@ -80,7 +82,7 @@ export class AppComponent implements OnInit {
         this.y = this._spriteService.sprites[0].y
       }
     
-      for (let i=0; i<this._spriteService.sprites.length; i++) {
+      for (let i=this._spriteService.sprites.length-1; i>=0; i--) {
         if (i>0) {
           if(!this._spriteService.sprites[i]) continue
           let oldX = this._spriteService.sprites[i].x

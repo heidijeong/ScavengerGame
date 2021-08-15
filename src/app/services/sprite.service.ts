@@ -44,14 +44,14 @@ export class SpriteService {
     playable: true, 
     type: 'self',
     url: '../assets/sprites/butterfly.png',
-    fps: 100,
+    fps: 7,
     x: 200,
     y: 200,
-    rows: 1,
-    columns: 18,
+    rows: 2,
+    columns: 4,
     spriteReference: null,
-    leftFrames: [5, 17],
-    rightFrames: [10,17]
+    leftFrames: [0, 3],
+    rightFrames: [4,7]
   }];
 
   bee:Sprite = {
