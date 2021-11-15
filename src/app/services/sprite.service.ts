@@ -86,7 +86,7 @@ export class SpriteService {
       acceleration: 2,
       scale: 10,
       playable: true, 
-      type: 'food',
+      type: 'prey',
       url: '../assets/sprites/flower.png',
       fps: 7,
       x: 200,
@@ -147,8 +147,8 @@ export class SpriteService {
   populateBee(numberToPopulate: number) {
     for(let i=0; i<numberToPopulate; i++) {
       let bee = this.bee;
-      bee.x = Math.floor(Math.random() * 750 * i)+300; // if u end up with decimals, the floor function rounds it down
-      bee.y = Math.floor(Math.random() * 300 * i)+100;
+      bee.x = Math.floor(Math.random() * 750 * i)+500; // if u end up with decimals, the floor function rounds it down
+      bee.y = Math.floor(Math.random() * 300 * i)+200;
       this.sprites.push(JSON.parse(JSON.stringify(bee)))
     }
   }

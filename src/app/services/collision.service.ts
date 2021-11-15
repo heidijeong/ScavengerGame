@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { GameService } from './game.service';
 import { MapService } from './map.service';
 import { Sprite } from './sprite.service';
 
@@ -6,11 +7,13 @@ import { Sprite } from './sprite.service';
   providedIn: 'root'
 })
 export class CollisionService {
+  gameState: string;
 
-  constructor(private _mapService: MapService) { }
+  constructor(private _mapService: MapService, private _gameService: GameService) { }
 
   detectBorder(sprite: Sprite, oldX: number, oldY: number, newX: number, newY: number) {
     let OFFSET = 2;
+    let scale =sprite.scale 
     let width = sprite.spriteReference.width; //first sprite = object, second sprite = all the object's necessary status (width, height, etc.)
     let height = sprite.spriteReference.height; 
 
@@ -27,18 +30,20 @@ export class CollisionService {
     }
 
   detectCollision(mySprite: Sprite, targetSprite: Sprite) {
-    const OFFSET = 4;
+    const OFFSET = 0.93;
 
-    let width = mySprite.spriteReference.width * mySprite.scale;
-    let height = mySprite.spriteReference.height * mySprite.scale;
+    
+
+    let width = mySprite.spriteReference.width;
+    let height = mySprite.spriteReference.height;
 
     let leftBound = mySprite.x-(width/OFFSET);
     let rightBound = mySprite.x+(width/OFFSET);
     let upperBound = mySprite.y-(height/OFFSET);
     let lowerBound = mySprite.y+(height/OFFSET);
 
-    width = targetSprite.spriteReference.width * targetSprite.scale;
-    height = targetSprite.spriteReference.height * targetSprite.scale;
+    width = targetSprite.spriteReference.width;
+    height = targetSprite.spriteReference.height;
 
     let targetLeftBound = targetSprite.x-(width/OFFSET);
     let targetRightBound = targetSprite.x+(width/OFFSET);
@@ -49,14 +54,13 @@ export class CollisionService {
     || (leftBound<targetRightBound && targetRightBound<rightBound)) {
       if ((upperBound<targetUpperBound && targetUpperBound<lowerBound) 
       || (upperBound<targetLowerBound && targetLowerBound<lowerBound)) {
-        if (targetSprite.type == 'food') {
+        if (targetSprite.type == 'prey') {
           targetSprite.scale = 0
         }
-        else if (targetSprite.type == 'predator') {
-          
+        else if (targetSprite.type == 'predator' && this._gameService.state == "playing") {
+          this._gameService.state = 'gameover'; //??
         }
       }
     }
-    }
-
+  }
 }

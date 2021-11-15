@@ -12,11 +12,12 @@ export class MapService {
   init(two: any) {
     let sky = two.makeRectangle(0, 0, 7000, 1500);
     sky.fill = '#6495ED';
-    sky.opacity = .50;
+
+    
 
     let ground = two.makeRectangle(0, 1100, 7000, 800);
     ground.fill = 'green';
-    ground.opacity = .70;
+ 
 
     let sun = two.makeCircle(620, 300, 150);
     sun.fill = 'yellow';
